@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pythonji-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pythonji-{{ version }}.tar.gz
   sha256: 6d757578095ace4f31019e36ebed46e657741c1d355100dfa3eaa3060b160a49
 
 build:
@@ -14,15 +14,15 @@ build:
     - pythonji = pythonji.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - flit
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - emoji
 
 test:
@@ -33,6 +33,7 @@ test:
     - pythonji --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/gahjelle/pythonji
